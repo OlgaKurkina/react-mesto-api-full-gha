@@ -16,21 +16,28 @@ class Api {
     return Promise.reject(`Ошибка: ${res.status}`);
   }
 
-  setToken(token) {
-    console.log(this._headers);
-    this._headers.Authorization = `Bearer ${token}`;
+  // setToken(token) {
+ //   this._headers.Authorization = `Bearer ${token}`;
+ // }
+
+ _setHeaders() {
+  const headers = {
+      'Content-Type': 'application/json',
+      authorization: `Bearer ${localStorage.getItem('jwt')}`
   }
+  return headers;
+}
 
   getCards() {
       return this._getRequest(`${this._basePath}/cards`, {
-      headers: this._headers,
+      headers: this._setHeaders(),
     });
   }
 
   addNewCard(data) {
     return this._getRequest(`${this._basePath}/cards`, {
       method: "POST",
-      headers: this._headers,
+      headers: this._setHeaders(),
       body: JSON.stringify({
         name: data.name,
         link: data.link,
@@ -41,14 +48,14 @@ class Api {
   getUserData() {
     return this._getRequest(`${this._basePath}/users/me`, {
       method: "GET",
-      headers: this._headers,
+      headers: this._setHeaders(),
     });
   }
 
   updateUserData(data) {
     return this._getRequest(`${this._basePath}/users/me`, {
       method: "PATCH",
-      headers: this._headers,
+      headers: this._setHeaders(),
       body: JSON.stringify({
         name: data.name,
         about: data.about,
@@ -60,30 +67,29 @@ class Api {
   updateUserAvatar(avatar) {
     return this._getRequest(`${this._basePath}/users/me/avatar`, {
       method: "PATCH",
-      headers: this._headers,
+      headers: this._setHeaders(),
       body: JSON.stringify(avatar),
     });
   }
 
   //удаление карточки
-  deleteMyCard(id) {
-    return this._getRequest(`${this._basePath}/cards/${id}`, {
+  deleteMyCard(_id) {
+    return this._getRequest(`${this._basePath}/cards/${_id}`, {
       method: "DELETE",
-      headers: this._headers,
+      headers: this._setHeaders(),
     });
   }
 
-  changeLikeStatus(id, isLiked) {
-    return this._getRequest(`${this._basePath}/cards/${id}/likes`, {
+  changeLikeStatus(_id, isLiked) {
+    return this._getRequest(`${this._basePath}/cards/${_id}/likes`, {
       method: `${!isLiked ? "DELETE" : "PUT"}`,
-      headers: this._headers,
-      //body: JSON.stringify(card),
+      headers: this._setHeaders(),
     });
   }
 }
 
 export const api = new Api({ 
-  basePath: 'http://localhost:3001',
+  basePath: 'http://localhost:3000',
   headers: {
   'Content-Type': 'application/json',
   Authorization: '',

@@ -59,6 +59,7 @@ function App() {
       .then((res) => {
         if (res) {
           setLoggedIn(true);
+          //api.setToken(res.token)
           localStorage.setItem("jwt", res.token);
           navigate("/", { replace: true });
         }
@@ -78,6 +79,7 @@ function App() {
         .checkToken(jwt)
         .then((res) => {
           if (res) {
+           // api.setToken(res)
             setLoggedIn(true);
             navigate("/", { replace: true });
             setIsUserEmail(res.data.email);
@@ -90,6 +92,7 @@ function App() {
   //выход
   function handleSignOut() {
     setLoggedIn(false);
+    //api.setToken(null)
     localStorage.removeItem("jwt");
     navigate("/signin", { replace: true });
   }
@@ -157,7 +160,8 @@ function App() {
       api
         .getUserData()
         .then((data) => {
-          setCurrentUser(data);
+          setCurrentUser(data.data);
+          console.log(data)
         })
         .catch((err) => {
           console.log(err);
