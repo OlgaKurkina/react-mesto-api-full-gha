@@ -16,13 +16,10 @@ class Api {
     return Promise.reject(`Ошибка: ${res.status}`);
   }
 
-  // setToken(token) {
- //   this._headers.Authorization = `Bearer ${token}`;
- // }
-
  _setHeaders() {
   const headers = {
-      'Content-Type': 'application/json',
+      Accept: "application/json",
+      "Content-Type": "application/json",
       authorization: `Bearer ${localStorage.getItem('jwt')}`
   }
   return headers;
@@ -89,7 +86,7 @@ class Api {
 }
 
 export const api = new Api({ 
-  basePath: 'http://localhost:3000',
+  basePath: "https://api.doktorovao.nomoreparties.sbs",
   headers: {
   'Content-Type': 'application/json',
   Authorization: '',
