@@ -6,7 +6,7 @@
 
 ## Ссылки на проект
 
-IP-адрес 51.250.94.68
+IP 51.250.94.68;
 
 Frontend http://doktorovao.nomoreparties.sbs
 
