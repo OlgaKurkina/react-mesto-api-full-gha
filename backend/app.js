@@ -28,9 +28,6 @@ app.get('/crash-test', () => {
 
 app.use(router);
 
-app.use('/', auth, require('./routes/users'));
-app.use('/', auth, require('./routes/cards'));
-
 app.use(errorLogger);
 app.use(errors());
 app.use(errorCheck);
