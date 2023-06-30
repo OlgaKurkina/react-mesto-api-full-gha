@@ -86,7 +86,8 @@ class Api {
 }
 
 export const api = new Api({ 
-  basePath: "https://api.doktorovao.nomoreparties.sbs",
+ basePath: "https://api.doktorovao.nomoreparties.sbs",
+ //basePath: "http://localhost:3000",
   headers: {
   'Content-Type': 'application/json',
   Authorization: '',
